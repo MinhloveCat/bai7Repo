@@ -1,0 +1,5 @@
+/**
+ * Calculator package.
+ */
+package calculator;
+
