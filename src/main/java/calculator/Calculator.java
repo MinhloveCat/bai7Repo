@@ -9,7 +9,7 @@ public final class Calculator {
   private static final int THE_FIRST_INTEGER = 10;
 
   /** Second integer. */
-  private static final int THE_SECOND_INTEGER = 20;
+  private static final int b = 20;
 
   /**
    * Adds two integers.
@@ -37,7 +37,7 @@ public final class Calculator {
 
     final Calculator calc = new Calculator();
 
-    calc.add(THE_FIRST_INTEGER, THE_SECOND_INTEGER);
+    calc.add(THE_FIRST_INTEGER, b);
   }
 }
 
