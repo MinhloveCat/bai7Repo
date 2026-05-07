@@ -2,6 +2,8 @@ name: Automated Code Review
 
 # 1. Trigger: Tự động chạy khi có sự kiện pull_request hướng vào nhánh main
 on:
+  push:
+    branches: ["main", "master"]
   pull_request:
     branches: [ "main", "master" ]
 
