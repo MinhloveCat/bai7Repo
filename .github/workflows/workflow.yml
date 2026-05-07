@@ -1,0 +1,42 @@
+name: Automated Code Review
+
+# 1. Trigger: Tự động chạy khi có sự kiện pull_request hướng vào nhánh main
+on:
+  pull_request:
+    branches: [ "main", "master" ]
+
+# Cấp quyền cho GitHub Actions để Bot có thể bình luận vào PR
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  review-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'temurin' # Hoặc distribution bạn đang dùng
+          cache: maven
+
+      - name: Run Maven Build and Checkstyle
+        # Chạy test và tạo báo cáo checkstyle (file XML)
+        run: mvn clean test checkstyle:checkstyle
+
+      - name: Inline Feedback
+        # 2. Sử dụng action để đọc file checkstyle.xml và comment lên code vi phạm
+        uses: dbelyaev/action-checkstyle@master
+        # Chạy bước này ngay cả khi bước mvn phía trên bị lỗi (fail)
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          checkstyle_config: sun_checks.xml # Cấu hình mặc định hoặc file checkstyle.xml của bạn
+          # Đường dẫn mặc định Maven sinh ra báo cáo Checkstyle
+          checkstyle_file: target/checkstyle-result.xml
