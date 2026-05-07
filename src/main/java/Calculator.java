@@ -13,5 +13,6 @@ public class Calculator {
         Calculator calc = new Calculator();
         calc.add(10, 20);
         calc.add(10,90);
+        calc.add(10,80);
     }
 }
