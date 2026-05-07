@@ -40,3 +40,4 @@ public final class Calculator {
     calc.add(THE_FIRST_INTEGER, THE_SECOND_INTEGER);
   }
 }
+
