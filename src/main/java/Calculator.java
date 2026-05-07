@@ -12,6 +12,6 @@ public class Calculator {
     static void main(String[] args) {
         Calculator calc = new Calculator();
         calc.add(10, 20);
-        calc.add(20,20);
+        calc.add(10,90);
     }
 }
